@@ -17,23 +17,22 @@ $(document).ready(readyNow);
 
 function readyNow() {
   $('#submitButton').on('click', addEmployee);
-  
+  // $('#clearButton').on('click', removeEmployee)
 }
 
 function addEmployee() {
   $('#total').remove();
-
+  
   let newEmployee = new Employee ($('#firstNameIn').val(), $('#lastNameIn').val(), $('#idIn').val(), $('#titleIn').val(), $('#salaryIn').val())
 
-  $('#tableBody').append(`<tr><td>${newEmployee.firstName}</td><td>${newEmployee.lastName}</td><td>${newEmployee.id}</td><td>${newEmployee.title}</td><td>${newEmployee.salary}</td></tr>`)
-
   roster.push(newEmployee);
+
   clearInput();
+  updateTable();
   addSalaries();
   ifMonthlyExceeds();
   
 }
-
 
 function clearInput() {
   $('#firstNameIn').val('');
@@ -58,3 +57,10 @@ function ifMonthlyExceeds() {
   }
 }
  
+
+function updateTable() {
+  $('#taco').remove();
+  for (let i = 0; i < roster.length; i++) {
+    $('#tableBody').append(`<tr id='taco'><td>${roster[i].firstName}</td><td>${roster[i].lastName}</td><td>${roster[i].id}</td><td>${roster[i].title}</td><td>${roster[i].salary}</td><td><button id="clearButton">CLEAR</button></td></tr>`)
+  }
+}
