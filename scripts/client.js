@@ -16,20 +16,18 @@ $(document).ready(readyNow);
 
 function readyNow() {
   $('#submitButton').on('click', addEmployee);
-  // $('#clearButton').on('click', removeEmployee)
+  $('#employeeList').on('click', '.taco', '.clearButton', removeEmployee);
 }
 
 function addEmployee() {
   $('#total').remove();
   
   let newEmployee = new Employee ($('#firstNameIn').val(), $('#lastNameIn').val(), $('#idIn').val(), $('#titleIn').val(), $('#salaryIn').val())
-
   roster.push(newEmployee);
 
   clearInput();
-  updateTable();
   ifMonthlyExceeds();
-  
+  render();
 }
 
 function clearInput() {
@@ -54,19 +52,43 @@ function ifMonthlyExceeds() {
     return $('#monthlySum').append(`<span id="total">$ ${totalMonthly.toFixed(2)}</span>`);
   }
 }
- 
 
-function updateTable() {
-  $('.taco').remove();
+function render() {
+  $('#tableBody').empty();
+
+      for (let employee of roster) {
+        let $employee = $(`<tr class='taco'>
+            <td class="tdStyle">${employee.firstName}</td>
+            <td class="tdStyle">${employee.lastName}</td>
+            <td class="tdStyle">${employee.id}</td>
+            <td class="tdStyle">${employee.title}</td>
+            <td class="tdStyle">$ ${employee.salary}</td>
+            <td class="tdStyle"><button class="clearButton">CLEAR</button></td>
+          </tr>`)
+          $employee.data(employee);
+          $('#tableBody').append($employee);
+      }
+}
+
+function removeEmployee() {
+  let employeeData = $(this).data();
+  console.log($(this));
+  console.log(employeeData);
+  
   for (let i = 0; i < roster.length; i++) {
-    $('#tableBody').append(
-      `<tr class='taco'>
-        <td class="tdStyle">${roster[i].firstName}</td>
-        <td class="tdStyle">${roster[i].lastName}</td>
-        <td class="tdStyle">${roster[i].id}</td>
-        <td class="tdStyle">${roster[i].title}</td>
-        <td class="tdStyle">${roster[i].salary}</td>
-        <td class="tdStyle"><button id="clearButton">CLEAR</button></td>
-      </tr>`)
+    let employee = roster[i];
+    console.log(employee);
+    
+    
+    if (employee.firstName === employeeData.firstName && 
+      employee.lastName === employeeData.lastName && 
+      employee.id === employeeData.id && 
+      employee.title === employeeData.title && 
+      employee.salary === employeeData.salary) {
+
+        roster.splice(i, 1);
+        console.log('remove');  
+    } 
   }
+  render();
 }
