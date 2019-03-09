@@ -11,7 +11,6 @@ class Employee {
 }
 
 const roster = [];
-let totalMonthly = 0;
 
 $(document).ready(readyNow);
 
@@ -44,16 +43,18 @@ function clearInput() {
 
 function addSalaries() {
   for (let i = 0; i < roster.length; i++) {
-    totalMonthly = Number(totalMonthly) + Number(roster[i].salary);
+    totalMonthly = totalMonthly + Number(roster[i].salary);
   }
-  return totalMonthly = totalMonthly / 12;
+  return totalMonthly = totalMonthly.toFixed(0) / 12;
 }
 
 function ifMonthlyExceeds() {
+  let totalMonthly = 0;
+
   if (totalMonthly > 20000) {
-    $('#monthlySum').css('color', 'red').append(`<span id="total">${(totalMonthly).toFixed(2)}</span>`);
+    return $('#monthlySum').css('color', 'red').append(`<span id="total">${totalMonthly.toFixed(2)}</span>`);
   } else {
-    $('#monthlySum').append(`<span id="total">${(totalMonthly).toFixed(2)}</span>`);
+    return $('#monthlySum').append(`<span id="total">${totalMonthly.toFixed(2)}</span>`);
   }
 }
  
