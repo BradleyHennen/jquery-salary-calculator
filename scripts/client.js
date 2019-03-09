@@ -22,9 +22,7 @@ function readyNow() {
 //Adds employee information to the array and table as well as checks inputs
 function addEmployee() {
 
-  if    (validateForm()) {
-    $('#total').remove();
-    
+  if    (validateForm()) {    
     let newEmployee = new Employee ($('#firstNameIn').val(), $('#lastNameIn').val(), $('#idIn').val(), $('#titleIn').val(), $('#salaryIn').val())
     roster.push(newEmployee);
 
@@ -58,6 +56,7 @@ function clearInput() {
 //Checks if monthly costs exceed $20,000 returns red alert if so. 
 function ifMonthlyExceeds() {
   let totalMonthly = 0;
+  $('#total').remove();
   for (let i = 0; i < roster.length; i++) {
     totalMonthly = totalMonthly + Number(roster[i].salary);
   }
@@ -107,7 +106,9 @@ function removeEmployee() {
       employee.salary === employeeData.salary) {
 
         roster.splice(i, 1);
-        console.log('remove');  
+        ifMonthlyExceeds();
+        console.log('Employee Removed');
+          
     } 
   }
   render();
