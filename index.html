@@ -11,40 +11,42 @@
     <header>
       <h1>Salary Calculator</h1>
     </header>
+      <main>
 
-    <div id="addEmployeeForm">
-      <h2>Add Employee</h2>
+        <div id="addEmployeeForm">
+          <h2>Add Employee:</h2>
+          <input type="text" id="firstNameIn" placeholder="First Name">
+          <input type="text" id="lastNameIn" placeholder="Last Name">
+          <input type="number" id="idIn" placeholder="ID">
+          <input type="text" id="titleIn" placeholder="Title">
+          <input type="number" id="salaryIn" placeholder="Annual Salary">
+          <br>
+          <button id="submitButton">Submit</button>
 
-      <input type="text" id="firstNameIn" placeholder="First Name">
-      <input type="text" id="lastNameIn" placeholder="Last Name">
-      <input type="number" id="idIn" placeholder="ID">
-      <input type="text" id="titleIn" placeholder="Title">
-      <input type="number" id="salaryIn" placeholder="Annual Salary">
+        </div>
 
-      <button id="submitButton">Submit</button>
+        <div id="employeeList">
+          <h2>Employee List:</h2>
 
-    </div>
+          <table>
+            <thead>
+              <td class="tableHead">First Name</td>
+              <td class="tableHead">Last Name</td>
+              <td class="tableHead">ID</td>
+              <td class="tableHead">Title</td>
+              <td class="tableHead">Annual Salary</td>
+            </thead>
+            <tbody id="tableBody">
+            
+            </tbody>
+          </table>
 
-    <div id="employeeList">
-      <h2>Employees</h2>
+        </div>
+        <div id="monthly">
+          <h3>Total Monthly: <span id="monthlySum"></span></h3>
+        </div>
 
-      <table>
-        <thead>
-          <td>First Name</td>
-          <td>Last Name</td>
-          <td>ID</td>
-          <td>Title</td>
-          <td>Annual Salary</td>
-        </thead>
-        <tbody id="tableBody">
-         
-        </tbody>
-      </table>
-
-    </div>
-    <div>
-      <p>Total Monthly: $<span id="monthlySum"></span></p>
-    </div>
+      </main>
 
   </body>
 </html>

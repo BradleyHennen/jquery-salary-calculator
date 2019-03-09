@@ -28,7 +28,6 @@ function addEmployee() {
 
   clearInput();
   updateTable();
-  addSalaries();
   ifMonthlyExceeds();
   
 }
@@ -41,27 +40,33 @@ function clearInput() {
   $('#salaryIn').val('');
 }
 
-function addSalaries() {
-  for (let i = 0; i < roster.length; i++) {
-    totalMonthly = totalMonthly + Number(roster[i].salary);
-  }
-  return totalMonthly = totalMonthly.toFixed(0) / 12;
-}
 
 function ifMonthlyExceeds() {
   let totalMonthly = 0;
+  for (let i = 0; i < roster.length; i++) {
+    totalMonthly = totalMonthly + Number(roster[i].salary);
+  }
+  totalMonthly = totalMonthly.toFixed(0) / 12;
 
   if (totalMonthly > 20000) {
-    return $('#monthlySum').css('color', 'red').append(`<span id="total">${totalMonthly.toFixed(2)}</span>`);
+    return $('#monthlySum').css({"background-color": "rgba(255, 0, 0, 0.5)"}).append(`<span id="total">$ ${totalMonthly.toFixed(2)}</span>`);
   } else {
-    return $('#monthlySum').append(`<span id="total">${totalMonthly.toFixed(2)}</span>`);
+    return $('#monthlySum').append(`<span id="total">$ ${totalMonthly.toFixed(2)}</span>`);
   }
 }
  
 
 function updateTable() {
-  $('#taco').remove();
+  $('.taco').remove();
   for (let i = 0; i < roster.length; i++) {
-    $('#tableBody').append(`<tr id='taco'><td>${roster[i].firstName}</td><td>${roster[i].lastName}</td><td>${roster[i].id}</td><td>${roster[i].title}</td><td>${roster[i].salary}</td><td><button id="clearButton">CLEAR</button></td></tr>`)
+    $('#tableBody').append(
+      `<tr class='taco'>
+        <td class="tdStyle">${roster[i].firstName}</td>
+        <td class="tdStyle">${roster[i].lastName}</td>
+        <td class="tdStyle">${roster[i].id}</td>
+        <td class="tdStyle">${roster[i].title}</td>
+        <td class="tdStyle">${roster[i].salary}</td>
+        <td class="tdStyle"><button id="clearButton">CLEAR</button></td>
+      </tr>`)
   }
 }
