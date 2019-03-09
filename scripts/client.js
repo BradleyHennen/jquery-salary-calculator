@@ -20,16 +20,31 @@ function readyNow() {
 }
 
 function addEmployee() {
-  $('#total').remove();
-  
-  let newEmployee = new Employee ($('#firstNameIn').val(), $('#lastNameIn').val(), $('#idIn').val(), $('#titleIn').val(), $('#salaryIn').val())
-  roster.push(newEmployee);
 
-  clearInput();
-  ifMonthlyExceeds();
-  render();
+  if    (validateForm()) {
+    $('#total').remove();
+    
+    let newEmployee = new Employee ($('#firstNameIn').val(), $('#lastNameIn').val(), $('#idIn').val(), $('#titleIn').val(), $('#salaryIn').val())
+    roster.push(newEmployee);
+
+    clearInput();
+    ifMonthlyExceeds();
+    render();
+  } else {
+    alert('Please fill out all fields.')
+  }
 }
 
+function validateForm() {
+    if ($('#firstNameIn').val() !== '' && $('#lastNameIn').val() !== '' && $('#idIn').val() !== '' && $('#titleIn').val() !== '' &&  $('#salaryIn').val() !== '') {
+      return true;
+    } else {
+      return false;
+    }
+}
+
+
+//Clears inputs when submitted
 function clearInput() {
   $('#firstNameIn').val('');
   $('#lastNameIn').val('');
