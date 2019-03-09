@@ -19,6 +19,7 @@ function readyNow() {
   $('#employeeList').on('click', '.taco', '.clearButton', removeEmployee);
 }
 
+//Adds employee information to the array and table as well as checks inputs
 function addEmployee() {
 
   if    (validateForm()) {
@@ -33,15 +34,16 @@ function addEmployee() {
   } else {
     alert('Please fill out all fields.')
   }
-}
+} //addEmployee End
 
+//Checks if all inputs are filled out
 function validateForm() {
     if ($('#firstNameIn').val() !== '' && $('#lastNameIn').val() !== '' && $('#idIn').val() !== '' && $('#titleIn').val() !== '' &&  $('#salaryIn').val() !== '') {
       return true;
     } else {
       return false;
     }
-}
+} //validateForm End
 
 
 //Clears inputs when submitted
@@ -51,9 +53,9 @@ function clearInput() {
   $('#idIn').val('');
   $('#titleIn').val('');
   $('#salaryIn').val('');
-}
+} //clearInput End
 
-
+//Checks if monthly costs exceed $20,000 returns red alert if so. 
 function ifMonthlyExceeds() {
   let totalMonthly = 0;
   for (let i = 0; i < roster.length; i++) {
@@ -68,6 +70,7 @@ function ifMonthlyExceeds() {
   }
 }
 
+//Adds employee information to the DOM via table 
 function render() {
   $('#tableBody').empty();
 
@@ -83,8 +86,10 @@ function render() {
           $employee.data(employee);
           $('#tableBody').append($employee);
       }
-}
+} //render End
 
+
+//Removes employee from DOM table and array if user hits the clear button
 function removeEmployee() {
   let employeeData = $(this).data();
   console.log($(this));
@@ -106,4 +111,4 @@ function removeEmployee() {
     } 
   }
   render();
-}
+} //removeEmployee End
