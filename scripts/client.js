@@ -17,7 +17,8 @@ $(document).ready(readyNow);
 
 function readyNow() {
   $('#submitButton').on('click', addEmployee);
-  $('#employeeList').on('click', '.taco', '.clearButton', removeEmployee);
+  // $('#employeeList').on('click', '.taco', '.clearButton', removeEmployee);
+  $('#tableBody').on('click', 'button.clearButton', removeEmployee);
 }
 
 
@@ -92,7 +93,7 @@ function render() {
 
 //Removes employee from DOM table and array if user hits the clear button
 function removeEmployee() {
-  let employeeData = $(this).data();
+  let employeeData = $(this).closest("tr").data();
   console.log('On Click Employee Data:', employeeData);
   
   for (let i = 0; i < roster.length; i++) {
