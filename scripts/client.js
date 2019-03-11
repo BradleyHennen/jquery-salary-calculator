@@ -14,15 +14,22 @@ const roster = [];
 
 $(document).ready(readyNow);
 
+
 function readyNow() {
   $('#submitButton').on('click', addEmployee);
-  $('#employeeList').on('click', '.taco', '.clearButton', removeEmployee);
+  // $('#employeeList').on('click', '.taco', '.clearButton', removeEmployee);
+  $('body').on('click', '.clearButton', '.taco', removeEmployee);
+}
+
+function test() {
+  console.log('test');
+  
 }
 
 //Adds employee information to the array and table as well as checks inputs
 function addEmployee() {
 
-  if    (validateForm()) {    
+  if (validateForm()) {    
     let newEmployee = new Employee ($('#firstNameIn').val(), $('#lastNameIn').val(), $('#idIn').val(), $('#titleIn').val(), $('#salaryIn').val())
     roster.push(newEmployee);
 
@@ -63,9 +70,9 @@ function ifMonthlyExceeds() {
   totalMonthly = totalMonthly.toFixed(0) / 12;
 
   if (totalMonthly > 20000) {
-    return $('#monthlySum').css({"background-color": "rgba(255, 0, 0, 0.5)"}).append(`<span id="total">$ ${totalMonthly.toFixed(2)}</span>`);
+    return $('#monthlySum').css({"background-color": "rgba(255, 0, 0, 0.5)"}).append(`<span id="total">$ ${addCommasToNumbers(totalMonthly.toFixed(2))}</span>`);
   } else {
-    return $('#monthlySum').append(`<span id="total">$ ${totalMonthly.toFixed(2)}</span>`);
+    return $('#monthlySum').css('background-color', 'transparent').append(`<span id="total">$ ${addCommasToNumbers(totalMonthly.toFixed(2))}</span>`);
   }
 }
 
@@ -79,9 +86,8 @@ function render() {
             <td class="tdStyle">${employee.lastName}</td>
             <td class="tdStyle">${employee.id}</td>
             <td class="tdStyle">${employee.title}</td>
-            <td class="tdStyle">$ ${employee.salary}</td>
-            <td class="tdStyle"><button class="clearButton">CLEAR</button></td>
-          </tr>`)
+            <td class="tdStyle">$ ${addCommasToNumbers(employee.salary)}</td>
+            <td class="tdStyle"><button class="clearButton">CLEAR</button></td></tr>`)
           $employee.data(employee);
           $('#tableBody').append($employee);
       }
@@ -90,8 +96,7 @@ function render() {
 
 //Removes employee from DOM table and array if user hits the clear button
 function removeEmployee() {
-  let employeeData = $(this).data();
-  console.log($(this));
+  let employeeData = $('.taco').data();
   console.log(employeeData);
   
   for (let i = 0; i < roster.length; i++) {
@@ -113,3 +118,8 @@ function removeEmployee() {
   }
   render();
 } //removeEmployee End
+
+//Adds commas to numbers
+function addCommasToNumbers(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

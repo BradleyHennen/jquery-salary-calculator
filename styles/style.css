@@ -26,10 +26,15 @@ h2 {
 
 }
 
+#white {
+    color: white;
+}
+
 h3 {
     margin-left: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
+    color: white;
 }
 
 input {
@@ -55,7 +60,7 @@ input {
 }
 
 #monthly {
-    margin-top: 20px;
+    margin-top: 50px;
     background-color: gray;
 }
 
