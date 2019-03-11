@@ -17,14 +17,10 @@ $(document).ready(readyNow);
 
 function readyNow() {
   $('#submitButton').on('click', addEmployee);
-  // $('#employeeList').on('click', '.taco', '.clearButton', removeEmployee);
-  $('body').on('click', '.clearButton', '.taco', removeEmployee);
+  $('#employeeList').on('click', '.taco', '.clearButton', removeEmployee);
 }
 
-function test() {
-  console.log('test');
-  
-}
+
 
 //Adds employee information to the array and table as well as checks inputs
 function addEmployee() {
@@ -96,12 +92,12 @@ function render() {
 
 //Removes employee from DOM table and array if user hits the clear button
 function removeEmployee() {
-  let employeeData = $('.taco').data();
-  console.log(employeeData);
+  let employeeData = $(this).data();
+  console.log('On Click Employee Data:', employeeData);
   
   for (let i = 0; i < roster.length; i++) {
     let employee = roster[i];
-    console.log(employee);
+    console.log('Roster:', employee);
     
     
     if (employee.firstName === employeeData.firstName && 
@@ -110,9 +106,10 @@ function removeEmployee() {
       employee.title === employeeData.title && 
       employee.salary === employeeData.salary) {
 
+        console.log('Employee Removed');
         roster.splice(i, 1);
         ifMonthlyExceeds();
-        console.log('Employee Removed');
+        
           
     } 
   }
